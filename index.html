@@ -1,22 +1,102 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-   
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base target="_blank" />
-   
     <title>Cheng</title>
-   
-    <div class="page-header">
-   
-    <img src="img/Cheng.png" alt="Cheng">
-   
-    <div class="container">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 2rem 1.5rem; /* 整体内边距，避免内容贴边 */
+            max-width: 1200px; /* 电脑端最大宽度，避免过宽 */
+            margin: 0 auto;
+        }
+        /* 头部容器：图片居左，与菜单横向排列（电脑端） */
+        .header-container {
+            display: flex;
+            align-items: flex-start; /* 图片顶部与菜单顶部对齐 */
+            gap: 2rem; /* 图片与菜单间距 */
+            margin-bottom: 3rem; /* 与下方内容间距 */
+        }
+        /* 左上角图片样式 */
+        .page-header img {
+            width: 120px; /* 固定宽度，避免过大 */
+            height: auto;
+            border-radius: 6px;
+            /* 确保图片始终在左上角，不随滚动偏移 */
+            position: sticky;
+            top: 2rem; /* 距离顶部2rem，与body内边距一致 */
+        }
+        /* 导航菜单样式 */
+        .menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            /* 菜单占剩余宽度，确保排版平衡 */
+            flex: 1;
+            max-width: 500px; /* 限制菜单最大宽度，避免过宽 */
+        }
+        .menu li a {
+            display: block;
+            padding: 1rem 1.5rem;
+            background-color: white;
+            color: #2c3e50;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center; /* 文字居中，更美观 */
+        }
+        .menu li a:hover {
+            background-color: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        /* 手机端适配：图片仍居左，但与菜单垂直排列 */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column; /* 垂直排列 */
+                align-items: flex-start; /* 图片/菜单均居左 */
+                gap: 1.5rem; /* 减小间距 */
+            }
+            .page-header img {
+                width: 100px; /* 手机端图片缩小 */
+                position: static; /* 取消粘性定位，避免遮挡 */
+            }
+            .menu {
+                width: 100%; /* 菜单占满手机宽度 */
+                max-width: none;
+            }
+            .menu li a {
+                font-size: 1.1rem; /* 手机端文字缩小 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部容器：图片居左 + 菜单右侧 -->
+    <div class="header-container">
+        <!-- 左上角图片 -->
+        <div class="page-header">
+            <img src="img/Cheng.png" alt="Cheng" />
+        </div>
+        <!-- 导航菜单 -->
         <ul class="menu">
-
-            <p><font size="5"><li><a href="https://github.com/xucheng04028/">Github</a></li></font></p>
-            <p><font size="5"><li><a href="https://t.me/xch04028">Telegram</a></li></font></p>
-            <p><font size="5"><li><a href="https://vless-5yd.pages.dev/b5c68612-d410-47c9-86ea-3edab70061d0">VLESS节点</a></li></font></p>
-            <p><font size="5"><li><a href="https://xucheng04028.github.io/sub/">订阅转换</a></li></font></p>
-            <p><font size="5"><li><a href="https://xucheng04028.github.io/AirCargoCalculator/">空运成本计算器</a></li></font></p>
-
+            <li><a href="https://github.com/xucheng04028/">Github</a></li>
+            <li><a href="https://t.me/xch04028">Telegram</a></li>
+            <li><a href="https://vless-5yd.pages.dev/b5c68612-d410-47c9-86ea-3edab70061d0">VLESS节点</a></li>
+            <li><a href="https://xucheng04028.github.io/sub/">订阅转换</a></li>
+            <li><a href="https://xucheng04028.github.io/AirCargoCalculator/">空运成本计算器</a></li>
+        </ul>
+    </div>
+</body>
+</html>
