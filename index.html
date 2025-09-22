@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <!-- 视口设置优化：禁止缩放，确保移动端正确显示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <base target="_blank" />
     <title>Cheng</title>
     <style>
-        /* 1. 全局重置与基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -18,39 +16,54 @@
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: #141414;
-            /* 手机端采用更紧凑的内边距，避免内容过窄 */
+            color: #FFFFFF;
             padding: 1.2rem;
             max-width: 1000px;
             margin: 0 auto;
             min-height: 100vh;
+            position: relative;
         }
 
-        /* 2. 预留标题位置（响应式高度） */
+        .theme-toggle {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            color: #999999;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            z-index: 100;
+        }
+        
+        .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
         .title-placeholder {
-            height: 50px; /* 手机端默认高度 */
+            height: 50px;
             margin-bottom: 1.2rem;
         }
 
-        /* 3. 导航菜单容器 */
         .menu-container {
             width: 100%;
         }
 
-        /* 4. 导航菜单样式 */
         .menu {
             list-style: none;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem; /* 手机端缩小间距，减少滚动需求 */
+            gap: 0.8rem;
         }
 
         .menu li a {
             display: block;
-            /* 触摸友好的尺寸：最小点击区域48px */
             padding: 1.1rem 0.8rem;
             background-color: #1F1F1F;
             color: #FFFFFF;
-            font-size: 1rem; /* 手机端字体适中，保证可读性 */
+            font-size: 1rem;
             text-decoration: none;
             border-radius: 4px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -58,19 +71,17 @@
             position: relative;
             overflow: hidden;
             text-align: center;
-            /* 确保按钮高度足够，便于触摸 */
             min-height: 54px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* 5. Hover交互效果（手机端同时支持触摸反馈） */
         .menu li a:hover,
-        .menu li a:active { /* 增加active状态，优化触摸反馈 */
+        .menu li a:active {
             background-color: #E50914;
             color: #ffffff;
-            transform: translateY(-2px); /* 手机端缩小位移，避免过度动画 */
+            transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(229, 9, 20, 0.4);
             border-color: #ff3b30;
         }
@@ -90,18 +101,22 @@
             left: 100%;
         }
 
-        /* 6. 响应式优化（细分手机屏幕尺寸） */
-        /* 平板及小屏设备 */
         @media (max-width: 768px) {
             .menu {
                 gap: 1rem;
             }
         }
 
-        /* 普通手机屏幕 */
         @media (max-width: 480px) {
             body {
                 padding: 1rem;
+            }
+            
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
             }
             
             .title-placeholder {
@@ -110,7 +125,7 @@
             }
             
             .menu {
-                grid-template-columns: 1fr; /* 手机端强制单列，避免文字挤压 */
+                grid-template-columns: 1fr;
                 gap: 0.9rem;
             }
             
@@ -120,7 +135,6 @@
             }
         }
 
-        /* 小屏手机（如iPhone SE等） */
         @media (max-width: 360px) {
             .title-placeholder {
                 height: 36px;
@@ -134,11 +148,10 @@
             }
         }
 
-        /* 7. 页面加载动画（优化手机性能） */
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(8px); /* 手机端减小动画幅度 */
+                transform: translateY(8px);
             }
             to {
                 opacity: 1;
@@ -147,11 +160,10 @@
         }
 
         .menu li {
-            animation: fadeIn 0.4s ease forwards; /* 加快动画速度，提升感知 */
+            animation: fadeIn 0.4s ease forwards;
             opacity: 0;
         }
 
-        /* 菜单项依次加载（延迟更紧凑） */
         .menu li:nth-child(1) { animation-delay: 0.05s; }
         .menu li:nth-child(2) { animation-delay: 0.1s; }
         .menu li:nth-child(3) { animation-delay: 0.15s; }
@@ -160,13 +172,48 @@
         .menu li:nth-child(6) { animation-delay: 0.3s; }
         .menu li:nth-child(7) { animation-delay: 0.35s; }
         .menu li:nth-child(8) { animation-delay: 0.4s; }
+
+        /* 浅色主题 */
+        body.light-mode {
+            background-color: #f5f5f5;
+            color: #1a202c;
+        }
+
+        body.light-mode .theme-toggle {
+            color: #64748b;
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.08);
+        }
+
+        body.light-mode .menu li a {
+            background-color: #ffffff;
+            color: #1e293b;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        body.light-mode .menu li a:hover,
+        body.light-mode .menu li a:active {
+            background-color: #1e40af;
+            color: #ffffff;
+            box-shadow: 0 6px 12px rgba(30, 64, 175, 0.25);
+            border-color: #3b82f6;
+        }
+
+        body.light-mode .menu li a::before {
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.15), transparent);
+        }
     </style>
 </head>
 <body>
-    <!-- 预留标题位置 -->
+    <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        切换主题
+    </button>
+
     <div class="title-placeholder"></div>
 
-    <!-- 导航菜单容器 -->
     <div class="menu-container">
         <ul class="menu">
             <li><a href="https://github.com/xucheng04028/">Github</a></li>
@@ -179,7 +226,31 @@
             <li><a href="#">新链接2</a></li> -->
         </ul>
     </div>
+
+    <script>
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            const savedTheme = localStorage.getItem('preferred-theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+                body.classList.add('light-mode');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const isLight = body.classList.contains('light-mode');
+                localStorage.setItem('preferred-theme', isLight ? 'light' : 'dark');
+                
+                themeToggle.classList.add('calculating');
+                setTimeout(() => themeToggle.classList.remove('calculating'), 300);
+            });
+        }
+        
+        window.onload = setupThemeToggle;
+    </script>
 </body>
 </html>
     
-
